@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Animator anim;
     public int maxHealth = 100;
     int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        anim.SetTrigger("Hurt");
         currentHealth -= damage;
 
         if (currentHealth <= 0)
@@ -30,9 +32,11 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Enemy Die");
-        //die anim
+        anim.SetBool("isDead", true);
+        this.enabled = false;
+        Destroy(gameObject, 2);
 
-        //disable enemy
     }
+
+
 }

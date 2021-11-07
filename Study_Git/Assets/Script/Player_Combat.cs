@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Player_Combat : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask wallLayer;
-    private CircleCollider2D circleCollider;
-    private BoxCollider2D boxCollider;
     public Animator anim;
     public Transform attackPoint;
     public float attackRange = 0.74f;
     public LayerMask enemyLayers;
     public int attackDamage = 40;
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
     void Start()
     {
 
@@ -21,8 +19,13 @@ public class Player_Combat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)){
-            Attack();
+        if (Time.time >= nextAttackTime)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
     }
 
@@ -41,16 +44,5 @@ public class Player_Combat : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-    
-    private bool isGrounded()
-    {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(circleCollider.bounds.center, circleCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
-        return raycastHit.collider != null;
-    }
-    private bool onWall()
-    {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
-        return raycastHit.collider != null;
-    }
+    }    
 }
