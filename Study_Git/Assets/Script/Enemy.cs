@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public Animator anim;
     public int maxHealth = 100;
     int currentHealth;
+    //[SerializeField] private LayerMask playerLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +38,4 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 2);
 
     }
-
-
 }
