@@ -9,10 +9,14 @@ public class Health_Player : MonoBehaviour
     public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead;
+    private bool invincible = false;
+    private Rigidbody2D myRigidBody;
 
     private void Awake()
     {
+        myRigidBody = GetComponent<Rigidbody2D>();
         currentHealth = startingHealth;
+        anim = GetComponent<Animator>();
     }
 
     public void TakeDamage(float _damage)
@@ -28,12 +32,31 @@ public class Health_Player : MonoBehaviour
         {
             if (!dead) 
             { 
-            anim.SetTrigger("Die");
-            GetComponent<Player_Movement>().enabled = false;
-            dead = true;
+                anim.SetTrigger("Die");
+                GetComponent<Player_Movement>().enabled = false;
+                myRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+                dead = true;
             }
         }
     }
 
+    void resetInvulnerability()
+    {
+        invincible = false;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(!invincible)
+        { 
+            if (collision.collider.CompareTag("Enemy") == true)
+            {
+                invincible = true;
+                TakeDamage(collision.collider.GetComponent<Enemy>().damage);
+                Invoke("resetInvulnerability", 2);
+            }
+        }
+    }
+
+    
 
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float damage;
     public Animator anim;
     public int maxHealth = 100;
     int currentHealth;
+    public bool isDead = false;
+    
     //[SerializeField] private LayerMask playerLayer;
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,7 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            isDead = true;
         }
     }
 
@@ -36,6 +40,7 @@ public class Enemy : MonoBehaviour
         anim.SetBool("isDead", true);
         this.enabled = false;
         Destroy(gameObject, 2);
-
     }
+
+
 }
