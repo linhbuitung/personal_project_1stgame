@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5280583350656979973}
   - component: {fileID: 5280583350656979969}
   - component: {fileID: 1054629934}
+  - component: {fileID: 32708039}
   m_Layer: 12
   m_Name: Normal_Slime
   m_TagString: Enemy
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -1459301023
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -673626547663820483, guid: b1b33c8fe7bd685499640d43908ef7d9, type: 3}
+  m_Sprite: {fileID: 411304583660902271, guid: e69eace09861daf4b9d1c5957c6e4ab2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -157,3 +158,24 @@ MonoBehaviour:
   damage: 1
   anim: {fileID: 5280583350656979973}
   maxHealth: 100
+  isDead: 0
+--- !u!114 &32708039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280583350656979971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21930a7e19240b245bbca52ab02408f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 6
+  timeBetween: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  moveSpeed: 7
+  detectRange: 6
+  player: {fileID: 0}

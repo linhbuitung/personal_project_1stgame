@@ -9,12 +9,14 @@ public class Slime_Movement : MonoBehaviour
     [SerializeField] private int timeBetween;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float detectRange;
     private Animator anim;
     private CapsuleCollider2D capsuleCollider;
     private Rigidbody2D myBody;
     public Rigidbody2D player;
     private float realmoveSpeed;
     Enemy enemyTracker;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +47,8 @@ public class Slime_Movement : MonoBehaviour
     {
         while (true)
         {
-            
             yield return new WaitForSeconds(timeBetween);
-            if (isGrounded())
+            if (isGrounded() && (Mathf.Abs(player.position.x - transform.position.x) < detectRange))
             {
                 anim.SetTrigger("jump");
                 myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
