@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float damage;
     public Animator anim;
-    public int maxHealth = 100;
+    public int maxHealth;
     int currentHealth;
     public bool isDead = false;
     

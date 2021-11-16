@@ -48,7 +48,7 @@ public class Slime_Movement : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timeBetween);
-            if (isGrounded() && (Mathf.Abs(player.position.x - transform.position.x) < detectRange))
+            if (isGrounded() && (Vector2.Distance(transform.position, player.position) < detectRange))
             {
                 anim.SetTrigger("jump");
                 myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
